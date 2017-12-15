@@ -1,83 +1,83 @@
 <form (ngSubmit)="getUser(user);userForm.reset();" #userForm="ngForm">
   <div class="form-group">
     <label for="name">User Name:</label>
-    <input type="text"
-           class="form-control"
-           id="name"
-           placeholder="Search GitHub user name"
-           [(ngModel)]="user"
-           name="name"
-           #name="ngModel"
-           required>
-    <div [hidden]="name.valid || name.pristine"
-         class="alert alert-danger">
+    <input type="text" class="form-control" id="name" 
+      placeholder="Search GitHub user name" 
+      [(ngModel)]="user" 
+      name="name" 
+      #name="ngModel"
+      required
+    >
+    <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
       User Name is required.
     </div>
   </div>
-  <button [disabled]="!userForm.form.valid"
-          class="btn btn-primary">Submit</button>
+  <button [disabled]="!userForm.form.valid" class="btn btn-primary">Submit</button>
 </form>
 
-<hr/>
+<hr>
 
 <div [hidden]="!submitted">
   <!--User Information -->
   <table class="table table-striped table-bordered">
     <thead>
-    <tr>
-      <th colspan="2">{{userDetail.name}} Details</th>
-    </tr>
+      <tr>
+        <th colspan="2">{{userDetail.name}} Details</th>
+      </tr>
     </thead>
     <tbody>
-    <tr>
-      <th>User Name:</th>
-      <td>{{userDetail.name}}</td>
-    </tr>
-    <tr>
-      <th>User Avtar:</th>
-      <td>
-        <img style="height:120px;" [src]="userDetail.avatar_url"/>
-      </td>
-    </tr>
-    <tr>
-      <th>Repository URL:</th>
-      <td><a [href]="userDetail.repos_url" target=_blank>{{userDetail.repos_url}}</a></td>
-    </tr>
-    <tr>
-      <th>Number of Repositories:</th>
-      <td>{{userDetail.public_repos}}</td>
-    </tr>
-    <tr>
-      <th>Location:</th>
-      <td>{{userDetail.location}}</td>
-    </tr>
-    <tr>
-      <th>Company:</th>
-      <td>{{userDetail.company}}</td>
-    </tr>
+      <tr>
+        <th>User Name:</th>
+        <td>{{userDetail.name}}</td>
+      </tr>
+      <tr>
+        <th>User Avtar:</th>
+        <td>
+          <img style="height:120px;" [src]="userDetail.avatar_url" />
+        </td>
+      </tr>
+      <tr>
+        <th>Repository URL:</th>
+        <td>
+          <a [href]="userDetail.repos_url" target=_blank>{{userDetail.repos_url}}</a>
+        </td>
+      </tr>
+      <tr>
+        <th>Number of Repositories:</th>
+        <td>{{userDetail.public_repos}}</td>
+      </tr>
+      <tr>
+        <th>Location:</th>
+        <td>{{userDetail.location}}</td>
+      </tr>
+      <tr>
+        <th>Company:</th>
+        <td>{{userDetail.company}}</td>
+      </tr>
     </tbody>
   </table>
   <!--Repository information -->
   <table class="table table-striped table-bordered">
     <thead>
-    <tr>
-      <th colspan="3">{{userDetail.name}} Repository Details</th>
-    </tr>
-    <tr>
-      <th>Name</th>
-      <th>Language</th>
-      <th>URL</th>
-    </tr>
+      <tr>
+        <th colspan="3">{{userDetail.name}} Repository Details</th>
+      </tr>
+      <tr>
+        <th>Repo Name</th>
+        <th>Language</th>
+        <th>URL</th>
+      </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let repo of repos  | paginate: { itemsPerPage:5, currentPage:p }">
-      <td>{{repo.name}}</td>
-      <td>{{repo.language}}</td>
-      <td><a [href]="repo.html_url" target=_blank>view</a>
-    </tr>
-    <tr>
-      <pagination-controls  (pageChange)="p=$event"></pagination-controls>
-    </tr>
+      <tr *ngFor="let repo of repos  | paginate: { itemsPerPage:5, currentPage:p }">
+        <td>{{repo.name}}</td>
+        <td>{{repo.language}}</td>
+        <td>
+          <a [href]="repo.html_url" target=_blank>view</a>
+      </tr>
+      <hr>
+      <pagination-controls (pageChange)="p=$event"></pagination-controls>
+
     </tbody>
   </table>
 </div>
