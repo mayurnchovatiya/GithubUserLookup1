@@ -41,7 +41,7 @@
     </tr>
     <tr>
       <th>Repository URL:</th>
-      <td><a href="{{userDetail.repos_url}}" target=_blank>{{userDetail.repos_url}}</a></td>
+      <td><a [href]="userDetail.repos_url" target=_blank>{{userDetail.repos_url}}</a></td>
     </tr>
     <tr>
       <th>Number of Repositories:</th>
@@ -70,10 +70,13 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let repo of repos">
+    <tr *ngFor="let repo of repos  | paginate: { itemsPerPage:5, currentPage:p }">
       <td>{{repo.name}}</td>
       <td>{{repo.language}}</td>
-      <td><a href="{{repo.html_url}}" target=_blank>view</a>
+      <td><a [href]="repo.html_url" target=_blank>view</a>
+    </tr>
+    <tr>
+      <pagination-controls  (pageChange)="p=$event"></pagination-controls>
     </tr>
     </tbody>
   </table>
